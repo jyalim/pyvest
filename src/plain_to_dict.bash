@@ -13,28 +13,33 @@ fmt() {
 
 foo() {
   cat << __EOF 
-  'ticker' : $(fmt $1 quotes),
-  'shares' : $(fmt $2 number),
-  'cvalue' : $(fmt $3 number),
-  'cbasis' : $(fmt $4 number),
-  'date'   : $(fmt $5 quotes),
-  'comm'   : $(fmt $6 number),
-  'broker' : $(fmt $7 quotes),
+          'ticker' : $(fmt $1 quotes),
+          'shares' : $(fmt $2 number),
+          'cvalue' : $(fmt $3 number),
+          'cbasis' : $(fmt $4 number),
+          'date'   : $(fmt $5 quotes),
+          'comm'   : $(fmt $6 number),
+          'broker' : $(fmt $7 quotes),
 __EOF
 }
 
-echo -e '[\n {'
-j=0
-for file in ${@-'dat/broker/*.trak'}; do
-  k=0
-  broker=$(gbasename -s .trak $file)
-  while read line; do
-    if [[ $k -gt 0 ]]; then
-      [[ $j -gt 1 ]] && echo ' }, {'
-      foo $line $broker
-    fi
-    let j++
-    let k++
-  done < $file
+echo -e '[\n  {'
+for dir in dat/*/; do
+  j=0
+  assetc=$(gbasename $dir)
+  echo -e "    '$assetc' : {\n      {"
+  for file in ${dir}*.vst; do
+    k=0
+    broker=$(gbasename -s .vst $file)
+    while read line; do
+      if [[ $k -gt 0 ]]; then
+        [[ $j -gt 1 ]] && echo '      }, {'
+        foo $line $broker
+      fi
+      let j++
+      let k++
+    done < $file
+  done
+  echo -e '    },'
 done
-echo -e ' },\n]'
+echo -e '  },\n]'
