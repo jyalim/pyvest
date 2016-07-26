@@ -9,6 +9,8 @@ e.g., if e-trade is broker,
 
     dat/stocks/e-trade.vst
 
+Then run `src/plain_to_dict.bash` and redirect the output to `dat/assets.vst`.
+
 Note that the only currently supported asset types are:
 
   * Stocks
