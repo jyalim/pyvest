@@ -11,6 +11,10 @@ from hellaPy import *
 from pylab import *
 from glob import glob
 
+"""
+A work in progress...
+"""
+
 bcomm = {
   'optionshouse' : 4.75,
   'tradeking'    : 4.95,
