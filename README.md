@@ -13,8 +13,8 @@ Then run `src/plain_to_dict.bash` and redirect the output to `dat/assets.vst`.
 
 Note that the only currently supported asset types are:
 
-  * Stocks
-  * Moneys
+  * stocks
+  * moneys
     * BTCUSD   
     * ETHBTC    ( Convert cost value/basis to USD )
     * USD       ( Set cost value to account balance )
